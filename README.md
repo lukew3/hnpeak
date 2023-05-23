@@ -1,4 +1,4 @@
 # hnpeak
 
-Keeping track of what position top hackernews posts peaked at
+Keeping track of the time and rank that top hackernews posts peak at
 
