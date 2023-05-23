@@ -2,7 +2,7 @@ use scraper::{Html, Selector};
 use std::time::{SystemTime, UNIX_EPOCH};
 
 fn get_hn() {
-    let connection = sqlite::open("test.db").unwrap();
+    let connection = sqlite::open("hnpeaks.db").unwrap();
 
     let response = reqwest::blocking::get("https://news.ycombinator.com/").unwrap().text().unwrap();
 
@@ -48,7 +48,7 @@ fn get_hn() {
 
 fn main() {
     // Create connection to database
-    let connection = sqlite::open("test.db").unwrap();
+    let connection = sqlite::open("hnpeaks.db").unwrap();
 
     // Create db table if not already existing
     let query = "CREATE TABLE IF NOT EXISTS posts (
@@ -58,7 +58,12 @@ fn main() {
     );";
     connection.execute(query).unwrap();
 
-    // Update database with current hackernews data
-    get_hn();
+    // Update every minute until killed
+    loop {
+        // Update database with current hackernews data
+        get_hn();
+        // Wait 2 minutes to update again
+        std::thread::sleep(std::time::Duration::from_secs(120));
+    }
 }
 
