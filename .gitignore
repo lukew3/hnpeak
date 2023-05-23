@@ -1,0 +1,8 @@
+# Generated files
+target/
+
+# Dependency listing
+Cargo.lock
+
+# Database
+test.db
