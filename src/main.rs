@@ -46,7 +46,9 @@ fn get_hn() {
     println!("Updated at {}", time);
 }
 
-fn main() {
+
+#[async_std::main]
+async fn main() -> tide::Result<()> {
     // Create connection to database
     let connection = sqlite::open("hnpeaks.db").unwrap();
 
@@ -58,12 +60,21 @@ fn main() {
     );";
     connection.execute(query).unwrap();
 
-    // Update every minute until killed
-    loop {
-        // Update database with current hackernews data
-        get_hn();
-        // Wait 2 minutes to update again
-        std::thread::sleep(std::time::Duration::from_secs(120));
-    }
+    std::thread::spawn(move || {
+        // Update every minute until killed
+        loop {
+            // Update database with current hackernews data
+            get_hn();
+            // Wait 2 minutes to update again
+            std::thread::sleep(std::time::Duration::from_secs(120));
+        }
+    });
+
+    let mut app = tide::new();
+    app.at("/").serve_file("static/index.html")?;
+    app.at("/static").serve_dir("static/")?;
+    app.listen("127.0.0.1:5000").await?;
+
+    Ok(())
 }
 

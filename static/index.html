@@ -1,0 +1,79 @@
+<html>
+<head>
+	<title>HNPeak</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+* {
+	font-family: 'Roboto', sans-serif;
+	margin: 0;
+}
+nav {
+	width: calc(100vw - 30px);
+	margin-left: 15px;
+	margin-top: 15px;
+}
+#title {
+	font-weight: 700;
+	font-size: 22pt;
+}
+#content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 15vh;
+	width: 100vw;
+}
+#tagline {
+	margin: auto;
+	text-align: center;
+	font-weight: 700;
+	font-size: 20pt;
+}
+#id-input {
+	height: 26pt;
+	width: 50vw;
+	border-radius: 5px;
+	border: 1px solid black;
+	margin: 10% 0;
+	padding-left: 10px;
+	font-size: 12pt;
+	align-self: center;
+}
+#post-title {
+	color: black;
+}
+#stats {
+	margin: 5% 0;
+	display: flex;
+	width: 40%;
+	font-size: 20pt;
+	justify-content: space-between;
+}
+
+</style>
+</head>
+<body>
+	<nav>
+		<h2 id="title">HNPeak<h2>
+	</nav>
+	<div id="content">
+		<h3 id="tagline">Find out the rank and time when a HackerNews post reached it's highest position</h3>
+		<form>
+			<input type="text" name="id" id="id-input" placeholder="Post a HackerNews discussion url or post id" />
+		</form>
+		<a id="post-title" href="#">Waymo and Uber partner to bring autonomous driving technology to Uber (waymo.com)</a>
+		<div id="stats">
+			<div id="rank-stat">
+				Reached position:
+				<p id="rank-stat-val">#1</p>
+			</div>
+			<div id="time-stat">
+				At:
+				<p id="time-stat-val">3:42am 4/3/2023</p>
+			</div>
+		</div>
+	</div>
+	
+</body>
