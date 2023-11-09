@@ -13,10 +13,19 @@ nav {
 	width: calc(100vw - 30px);
 	margin-left: 15px;
 	margin-top: 15px;
+	display: flex;
 }
 #title {
 	font-weight: 700;
 	font-size: 22pt;
+}
+#titleLogo {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 12.5px 21.7px 12.5px;
+	border-color: transparent transparent #ff6600 transparent;
+	margin: 6px 4px;
 }
 #content {
 	display: flex;
@@ -56,7 +65,8 @@ nav {
 </head>
 <body>
 	<nav>
-		<h2 id="title">HNPeak<h2>
+		<h2 id="title">HNPeak</h2>
+		<span id="titleLogo"></span>
 	</nav>
 	<div id="content">
 		<h3 id="tagline">Find out the rank and time when a HackerNews post reached it's highest position</h3>
