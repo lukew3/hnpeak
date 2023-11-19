@@ -6,3 +6,6 @@ Cargo.lock
 
 # Database
 hnpeaks.db
+
+# Env
+venv/

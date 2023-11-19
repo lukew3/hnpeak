@@ -46,6 +46,25 @@ fn get_hn() {
     println!("Updated at {}", time);
 }
 
+#[derive(serde::Deserialize)]
+struct GetPageParams {
+    pub id: String,
+}
+
+impl Default for GetPageParams {
+    fn default() -> Self {
+        Self { id: "-1".to_string() }
+    }
+}
+
+async fn get_page(mut req: tide::Request<()>) -> tide::Result {
+    let params: GetPageParams = req.query()?;
+    let id = params.id;
+    let page_txt = std::fs::read_to_string("static/index.html");
+    Ok(page_txt);
+    //Ok(format!("Hello, {}", "luke").into())
+}
+
 
 #[async_std::main]
 async fn main() -> tide::Result<()> {
@@ -71,7 +90,8 @@ async fn main() -> tide::Result<()> {
     });
 
     let mut app = tide::new();
-    app.at("/").serve_file("static/index.html")?;
+//    app.at("/").serve_file("static/index.html")?;
+    app.at("/").get(get_page);
     app.at("/static").serve_dir("static/")?;
     app.listen("127.0.0.1:5000").await?;
 
